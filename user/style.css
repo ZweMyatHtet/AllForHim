@@ -1,0 +1,377 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  /* height: 10000vh; */
+}
+
+.discount-bar {
+  width: 100%;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+  padding: 12px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.discount-text {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: bold;
+  animation: slideLeft 25s linear infinite;
+  padding-left: 100%;
+}
+
+.discount-text i {
+  margin: 0 12px;
+  color: #ffd700;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* .header {
+  margin-top: 45px;
+} */
+
+.header {
+  width: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 15px 30px;
+  position: fixed;
+  top: 44px;
+  left: 0;
+  z-index: 999;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.small-c {
+  display: flex;
+  gap: 30px;
+}
+
+.small-c div {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.small-c div:hover {
+  color: #0d6efd;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  position: absolute;
+  top: -5px;
+  right: 40px;
+  width: 0;
+  opacity: 0;
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  z-index: 9;
+  background-color: white;
+}
+
+.search-input.active {
+  width: 180px;
+  opacity: 1;
+}
+
+.search-icon {
+  cursor: pointer;
+  color: #333;
+  z-index: 10;
+  font-size: 20px;
+}
+
+.account,
+.cart {
+  font-size: 20px;
+}
+
+/* body */
+.container2 {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 120px;
+}
+
+.container2 > div {
+  flex: 1; /* 50% width */
+  position: relative;
+  overflow: hidden;
+}
+
+.container2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.container2 div div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+}
+
+.container2 h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.container2 a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.container2 a:hover {
+  color: #ffd700;
+}
+
+/* shop-the-final-sale */
+
+.shop-the-final-sale {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  width: 100%;
+}
+
+.shop-the-final-sale > div {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.last-chance {
+  background-color: black;
+  color: white;
+}
+
+.shop-the-final-sale h3 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.shop-the-final-sale p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shop-the-final-sale button {
+  padding: 12px 24px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.shop-the-final-sale button:hover {
+  background-color: #084298;
+}
+
+/* shop-now */
+
+.shop-the-final-sales {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  align-items: stretch;
+  width: 100%;
+  padding: 60px 40px;
+  gap: 30px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.image-card {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  min-height: 450px;
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.05);
+}
+
+.discount {
+  position: absolute;
+  top: 25px;
+  left: 15px;
+  background-color: white;
+  color: black;
+  padding: 8px 14px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.text-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  z-index: 5;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+}
+
+.text-overlay h2 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.text-overlay p {
+  font-size: 15px;
+  max-width: 250px;
+}
+
+.shop-now-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.shop-now-btn {
+  padding: 12px 30px;
+  background-color: white;
+  color: black;
+  font-weight: 900;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.shop-now-btn:hover {
+  background-color: #333;
+}
+
+/* footer */
+
+footer {
+  width: 100%;
+  background-color: #f1f1f1;
+  padding: 40px 30px;
+  margin-top: 60px;
+  border-top: 1px solid #ddd;
+  bottom: 0;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  font-size: 14px;
+  color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer > div {
+  flex: 1 1 150px;
+  min-width: 150px;
+}
+
+.footer img.logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.footer h5 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.footer div textarea {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  min-height: 50px;
+}
