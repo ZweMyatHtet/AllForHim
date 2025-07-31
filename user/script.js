@@ -1,9 +1,13 @@
-function toggleSearch() {
-  const input = document.querySelector(".search-input");
-  input.classList.toggle("active");
-  if (input.classList.contains("active")) {
-    input.focus();
-  } else {
-    input.value = "";
-  }
+function toggleDropdown() {
+  const menu = document.getElementById("roleDropdown");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
+
+window.addEventListener("click", function (e) {
+  const dropdown = document.getElementById("roleDropdown");
+  const icon = document.querySelector(".account");
+
+  if (!dropdown.contains(e.target) && e.target !== icon) {
+    dropdown.style.display = "none";
+  }
+});

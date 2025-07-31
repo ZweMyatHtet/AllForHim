@@ -115,110 +115,132 @@ if (isset($_GET['bSearch'])) {
 </head>
 
 <body class="bg-light">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <?php require_once "navbar.php"; ?>
-      </div>
-    </div>
-  </div>
+  <!-- Navbar -->
+  <?php require_once "navbar.php"; ?>
 
-  <div class="container-fluid">
+  <!-- Page Container -->
+  <div class="container-fluid px-4">
     <div class="row mt-3">
-      <div class="col-md-2 py-5">
+      <!-- Sidebar Filters -->
+      <div class="col-md-3 col-lg-2 mb-4">
         <!-- Category filter -->
-        <form action="viewItem.php" method="get" class="form border border-primary border-1 rounded">
-          <select name="cateChoose" class="form-select">
-            <option>Choose Category</option>
-            <?php
-              if (isset($categories)) {
-                  foreach ($categories as $category) {
-                      echo "<option value='{$category['category_id']}'>{$category['name']}</option>";
-                  }
-              }
-            ?>
+        <form action="viewItem.php" method="get" class="form border p-3 border-primary rounded mb-4 shadow-sm bg-white">
+          <h6 class="fw-bold mb-3">Filter by Category</h6>
+          <select name="cateChoose" class="form-select mb-3">
+            <option disabled selected>Choose Category</option>
+            <?php foreach ($categories as $category): ?>
+            <option value="<?= $category['category_id'] ?>"><?= htmlspecialchars($category['name']) ?></option>
+            <?php endforeach; ?>
           </select>
-          <button class="mt-3 btn btn-sm btn-outline-primary rounded-pill" name="cate" type="submit">Submit</button>
+          <button class="btn btn-outline-primary w-100 rounded-pill" name="cate" type="submit">Apply</button>
         </form>
 
-        <!-- Price range filter -->
-        <form action="viewItem.php" method="get" class="mt-5 form border border-primary border-1 rounded">
-          <fieldset>
-            <legend>
-              <h6>Choose Price Range</h6>
-            </legend>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="priceRange" value="0">
-              <label class="form-check-label">$1-$100</label><br>
-              <input class="form-check-input" type="radio" name="priceRange" value="1">
-              <label class="form-check-label">$101-$200</label><br>
-              <input class="form-check-input" type="radio" name="priceRange" value="2">
-              <label class="form-check-label">$201-$300</label>
-            </div>
-            <button class="mt-3 btn btn-sm btn-outline-primary rounded-pill" name="priceRadio"
-              type="submit">Submit</button>
-          </fieldset>
+        <!-- Price filter -->
+        <form action="viewItem.php" method="get" class="form border p-3 border-primary rounded shadow-sm bg-white">
+          <h6 class="fw-bold mb-3">Filter by Price</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="priceRange" value="0" id="price0">
+            <label class="form-check-label" for="price0">$1 - $100</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="priceRange" value="1" id="price1">
+            <label class="form-check-label" for="price1">$101 - $200</label>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="priceRange" value="2" id="price2">
+            <label class="form-check-label" for="price2">$201 - $300</label>
+          </div>
+          <button class="btn btn-outline-primary w-100 rounded-pill" name="priceRadio" type="submit">Apply</button>
         </form>
       </div>
 
-      <div class="col-md-10 mx-auto py-5 mb-2">
-        <div class="py-2"> <a class="btn btn-outline-primary" href="insertItem.php">Add New Item</a></div>
+      <!-- Main content -->
+      <div class="col-md-9 col-lg-10">
+        <!-- Add new item -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0 fw-bold text-dark">Product List</h4>
+          <div class="btn-group">
+            <a class="btn btn-outline-secondary rounded-pill shadow-sm me-5" href="viewItem.php">🔄 View All</a>
+            <a class="btn btn-dark rounded-pill shadow-sm" href="insertItem.php">➕ Add New Item</a>
+          </div>
+        </div>
 
+        <!-- Flash messages -->
         <?php
-        if (isset($_SESSION['insertSuccess'])) {
-            echo "<p class='alert alert-success'>{$_SESSION['insertSuccess']}</p>";
-            unset($_SESSION['insertSuccess']);
-        } elseif (isset($_SESSION['updateSuccess'])) {
-            echo "<p class='alert alert-success'>{$_SESSION['updateSuccess']}</p>";
-            unset($_SESSION['updateSuccess']);
-        } elseif (isset($_SESSION['deleteSuccess'])) {
-            echo "<p class='alert alert-success'>{$_SESSION['deleteSuccess']}</p>";
-            unset($_SESSION['deleteSuccess']);
-        }
+          $flashMessages = ['insertSuccess', 'updateSuccess', 'deleteSuccess'];
+          foreach ($flashMessages as $msg) {
+              if (isset($_SESSION[$msg])) {
+                  echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                          {$_SESSION[$msg]}
+                          <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>";
+                  unset($_SESSION[$msg]);
+              }
+          }
         ?>
 
-        <!-- Items table -->
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover align-middle text-center">
+        <!-- Products table -->
+        <div class="table-responsive shadow-sm">
+          <table class="table table-bordered table-hover align-middle text-center bg-white">
             <thead class="table-primary">
               <tr>
-                <th style="min-width: 100px;">Name</th>
+                <th style="min-width: 120px;">Name</th>
                 <th style="min-width: 100px;">Category</th>
-                <th style="min-width: 100px;">Description</th>
-                <th style="min-width: 80px;">Price ($)</th>
-                <th style="min-width: 80px;">Brand</th>
-                <th style="min-width: 200px;">Image</th>
-                <th style="min-width: 50px;">Stock</th>
-                <th style="min-width: 80px;">Added By</th>
-                <th style="min-width: 200px;" colspan="2">Action</th>
+                <th style="min-width: 150px;">Description</th>
+                <th>Price ($)</th>
+                <th>Brand</th>
+                <th>Image</th>
+                <th>Stock</th>
+                <th>Added By</th>
+                <th colspan="2">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <?php
-      if (isset($items)) {
-        foreach ($items as $item) {
-          echo "<tr style='word-break: break-word;'>
-            <td>$item[name]</td>
-            <td>$item[categories]</td>
-            <td>$item[description]</td>
-            <td>\$$item[price]</td>
-            <td>$item[brand]</td>
-            <td><img src='$item[image]' style='width:80px; height:80px; object-fit:cover;' alt='Product Image'></td>
-            <td>$item[stock]</td>
-            <td>$item[added_by]</td>
-            <td><a class='btn btn-outline-primary btn-sm rounded-pill' href='editItem.php?eid=$item[product_id]'>Edit</a></td>
-            <td><a class='btn btn-outline-danger btn-sm rounded-pill' href='editItem.php?did=$item[product_id]'>Delete</a></td>
-          </tr>";
-        }
-      }
-      ?>
+              <?php if (!empty($items)): ?>
+              <?php foreach ($items as $item): ?>
+              <tr>
+                <td><?= htmlspecialchars($item['name']) ?></td>
+                <td><?= htmlspecialchars($item['categories']) ?></td>
+                <td><?= htmlspecialchars($item['description']) ?></td>
+                <td>$<?= $item['price'] ?></td>
+                <td><?= htmlspecialchars($item['brand']) ?></td>
+                <td><img src="<?= htmlspecialchars($item['image']) ?>" class="img-thumbnail"
+                    style="width:80px;height:80px;object-fit:cover;" alt="Product Image"></td>
+                <td><?= $item['stock'] ?></td>
+                <td><?= htmlspecialchars($item['added_by']) ?></td>
+                <td><a class="btn btn-sm btn-outline-primary rounded-pill"
+                    href="editItem.php?eid=<?= $item['product_id'] ?>">Edit</a></td>
+                <td><a class="btn btn-sm btn-outline-danger rounded-pill"
+                    href="editItem.php?did=<?= $item['product_id'] ?>">Delete</a></td>
+              </tr>
+              <?php endforeach; ?>
+              <?php else: ?>
+              <tr>
+                <td colspan="10" class="text-muted">No items found.</td>
+              </tr>
+              <?php endif; ?>
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS + Auto Dismiss -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // Auto-dismiss alerts after 4s
+  setTimeout(() => {
+    const alert = document.querySelector('.alert');
+    if (alert) {
+      const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+      bsAlert.close();
+    }
+  }, 4000);
+  </script>
 </body>
+
+</html>
 
 </html>
 <?php } else { header("Location:login.php"); } ?>

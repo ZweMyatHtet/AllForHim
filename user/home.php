@@ -23,10 +23,11 @@
   <header class="header">
     <div class="header-inner">
       <div class="small-c">
-        <div>Shop</div>
-        <div>About</div>
-        <div>Last Call</div>
-        <div>Journal</div>
+        <div><a href="home.php">Home</a></div>
+
+        <div><a href="userViewItem.php">Shop</a></div>
+        <div><a href="aboutUs.php">About</a></div>
+        <div><a href="lastCall.php">Last Call</a></div>
       </div>
 
       <div class="logo-title">
@@ -35,12 +36,17 @@
       </div>
 
       <div class="nav-bar">
-        <div class="search-container">
-          <input type="text" class="search-input" placeholder="Search...">
-          <i class="fa-solid fa-magnifying-glass search-icon" onclick="toggleSearch()"></i>
+        <!-- User Icon -->
+        <div class="dropdown-container">
+          <i class="fa-solid fa-circle-user account" onclick="toggleDropdown()"></i>
+
+          <!-- Dropdown Menu -->
+          <div id="roleDropdown" class="dropdown-menu">
+            <a href="clogin.php"> Login as User</a>
+            <a href="../admin/login.php"> Login as Admin</a>
+            <a href="#" onclick="toggleDropdown()">Cancel</a>
+          </div>
         </div>
-        <div><i class="fa-solid fa-circle-user account"></i></div>
-        <div><i class="fa-solid fa-cart-shopping cart"></i></div>
       </div>
     </div>
   </header>
@@ -52,7 +58,7 @@
         <h4>Final Inventory.
           Up to 65% Off.
         </h4>
-        <a href="">Shop the Final Sale
+        <a href="userViewItem.php">Shop the Final Sale
           <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
@@ -61,7 +67,7 @@
       <img src="img/img2.webp">
       <div>
         <h4>A New Era of Travel Starts Now</h4>
-        <a href="">Explore the Future
+        <a href="userViewItem.php">Explore the Future
           <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
@@ -79,7 +85,8 @@
           our best sellers at our cost.</p>
       </div>
       <div>
-        <button>Shop the Final Sale</button>
+        <a href="userViewItem.php"> <button>Shop the Final Sale</button>
+        </a>
       </div>
     </div>
     <div class="last-chance">
@@ -125,12 +132,75 @@
     </div>
 
     <div class="shop-now-wrapper">
-      <button class="shop-now-btn">Shop Now</button>
+      <a href="userViewItem.php"> <button class="shop-now-btn">Shop Now</button>
+      </a>
     </div>
 
   </div>
 
+  <div class="rating">
+    <div class="rating-text">
+      <p>We want you to move - not just from one place to another but toward something greater.</p>
+    </div>
+    <div class="rating-review">
+      <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <div class="review-title">5 Stars</div>
+      <div class="review-text">Thicker pant than the Evolution, great quality, big fan.</div>
+    </div>
 
+    <div>
+      <h3>The Only Gear You Need For the Road
+
+        Ahead
+      </h3>
+      <p>Elevate Your Travel Experience</p>
+    </div>
+  </div>
+
+  <div class="th_design">
+    <div>
+      <h3>
+        Thoughtful Design
+      </h3>
+      <p>Quality and the art of true craftsmanship create beauty. We understand that beauty is the antidote to the
+        overwhelming stream of noise and disposable possessions. With a discerning eye for beauty, we bring focus and
+        clarity to our lives and the world around us. Our designs are not just visually appealing but also serve
+        multiple functions, ensuring that every product we create is both beautiful and purposeful.
+
+      </p>
+
+    </div>
+  </div>
+
+  <div class="journey">
+    <div><img src="img/journey.webp" alt=""></div>
+    <div>
+      <h3>The Journey Is
+        The Destination</h3>
+      <p>Western Rise is evolving. We’re building the next generation of travel apparel - designed for movement,
+        adventure, and the way you explore the world. Be the first to experience what’s next.</p>
+    </div>
+  </div>
+
+  <div class="follow_us">
+    <div>
+      <div>Follow us</div>
+      <div>@AllFor_Him</div>
+
+    </div>
+    <div>
+      <img src="img/home2.webp" alt="">
+      <img src="img/home3.webp" alt="">
+      <img src="img/home4.webp" alt="">
+      <img src="img/home5.webp" alt="">
+    </div>
+  </div>
 
   <footer>
     <div class="footer">
